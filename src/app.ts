@@ -4,6 +4,7 @@ import divisionRouter from "./routes/divisionHandler";
 import {json, urlencoded} from 'body-parser';
 import dotenv from 'dotenv';
 import departamentoRouter from './routes/departamentoHandler';
+import profesoresRouter from './routes/profesoresHandler';
 
 
 const app = express();
@@ -20,6 +21,7 @@ app.get('/',(req,res)=>{
 
 app.use('/division',divisionRouter);
 app.use('/departamento',departamentoRouter);
+app.use('/profesores',profesoresRouter);
 
 connection.sync().then(()=>{
     console.log("La base de datos funciona");
