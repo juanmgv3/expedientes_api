@@ -25,3 +25,11 @@ export const crearDivision:RequestHandler = async (req,res)=>{
 
     return res.status(200).json(division);
 }
+
+export const actualizarDivision:RequestHandler = async (req,res)=>{
+    const {id} = req.params;
+    await Division.update({...req.body},{where:{idDivisiones:id}});
+    const divisionActualizada:Division | null = await Division.findByPk(id);
+    return res.status(200)
+    .json({message:"División actualizada ok",data:divisionActualizada});
+}
