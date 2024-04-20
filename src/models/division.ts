@@ -1,4 +1,5 @@
-import { Table, Model, Column, DataType } from 'sequelize-typescript'; 
+import { Table, Model, Column, DataType, HasMany } from 'sequelize-typescript'; 
+import { Departamento } from './departamento';
 
 @Table({
     tableName: 'Divisiones',
@@ -19,4 +20,7 @@ export class Division extends Model{
         allowNull: false,
     })
     nombre!: string;
+
+    @HasMany(()=>Departamento,'Divisiones_idDivisiones')
+    departamentos!:Departamento[]
 }

@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 import { Division } from "../models/division";
+import { Departamento } from "../models/departamento";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -18,7 +19,7 @@ const connection = new Sequelize({
     database: db,
     logging: (...msg)=>console.log(msg),
     port: 33062,
-    models: [Division]
+    models: [Division,Departamento]
 });
 
 export default connection;

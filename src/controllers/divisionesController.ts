@@ -14,7 +14,7 @@ export const test:RequestHandler = async (req,res)=>{
 }
 
 export const getDivisiones:RequestHandler = async (req,res)=>{
-    const divisiones = await Division.findAll();
+    const divisiones = await Division.findAll({include:['departamentos']});
 
     return res.status(200).json(divisiones);
 }
