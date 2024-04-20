@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import { Division } from "../models/division";
 import {Op} from 'sequelize';
+import { Departamento } from "../models/departamento";
 
 /**
  * Create -> crear un recurso (insert)
@@ -58,5 +59,23 @@ export const buscarDivision:RequestHandler = async (req,res)=>{
     return res.status(200).json({
         message:`Se encontraron ${divisiones.length} coincidencias para \'${term}\'`,
         data:divisiones
+    });
+
+}
+
+export const crearDepartamentoAsociado:RequestHandler = async (req,res)=>{
+    const {id} = req.params;
+    const division = await Division.findByPk(id);
+    if(!division){
+        return res.status(404).json({message:"La división no existe"});
+    }
+
+    const departamento = await Departamento.create({
+        nombre:req.body.nombre,
+        Divisiones_idDivisiones:id
+    }).then((departamento)=>{
+        return res.status(200).json({message:"Departamento creado",data:departamento}); 
+    }).catch((error)=>{
+        return res.status(400).json({message:"Error al crear el departamento",error:error.message});
     });
 }
