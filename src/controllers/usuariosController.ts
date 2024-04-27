@@ -47,3 +47,19 @@ export const listarUsuarios:RequestHandler = async (req,res)=>{
         return res.status(500).json({message:"Error al obtener los usuarios",error:error.message});
     });
 }
+
+export const eliminarUsuario:RequestHandler = async (req,res)=>{
+    const id = req.params.id;
+    
+    const usuario = await Usuario.findByPk(id);
+    if(!usuario){
+        return res.status(404).json({message:"El usuario no existe"});
+    }
+
+
+    await Usuario.destroy({where:{idUsuarios:id}}).then(()=>{
+        return res.status(200).json({message:"Usuario eliminado"});
+    }).catch((error)=>{
+        return res.status(500).json({message:"Error al eliminar el usuario",error:error.message});
+    });
+}

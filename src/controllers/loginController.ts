@@ -8,7 +8,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const secreto = process.env.APP_SECRET || 'palabraSecreta';
-const expiration_token = "60d";
+const expiration_token = process.env.TOKEN_EXPIRATION || '15s';
 export const login:RequestHandler = async (req,res)=>{
 
     
