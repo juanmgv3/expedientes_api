@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 import departamentoRouter from './routes/departamentoHandler';
 import profesoresRouter from './routes/profesoresHandler';
 import usuariosRouter from './routes/usuariosHandler';
-
+import loginRouter from './routes/loginHandler';
 
 const app = express();
 dotenv.config();
@@ -24,6 +24,7 @@ app.use('/division',divisionRouter);
 app.use('/departamento',departamentoRouter);
 app.use('/profesores',profesoresRouter);
 app.use('/usuarios',usuariosRouter);
+app.use('/login',loginRouter);
 
 connection.sync().then(()=>{
     console.log("La base de datos funciona");

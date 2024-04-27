@@ -3,6 +3,12 @@ import { Usuario } from "../models/usuario";
 import bcrypt from 'bcrypt';
 
 export const crearUsuario:RequestHandler = async (req,res)=>{
+    const usuario = await Usuario.findOne({where:{correo:req.body.correo}});
+
+    if(usuario){
+        return res.status(400).json({message:"El correo ya está en uso"});
+    }
+
     await Usuario.create({
         correo: req.body.correo,
         nombre: req.body.nombre,
