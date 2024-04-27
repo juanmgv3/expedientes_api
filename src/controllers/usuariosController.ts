@@ -33,3 +33,11 @@ export const actualizarUsuario:RequestHandler = async (req,res)=>{
     });
 
 };
+
+export const listarUsuarios:RequestHandler = async (req,res)=>{
+    await Usuario.findAll({attributes:{exclude:["password"]}}).then((usuarios)=>{
+        return res.status(200).json(usuarios);
+    }).catch((error)=>{
+        return res.status(500).json({message:"Error al obtener los usuarios",error:error.message});
+    });
+}

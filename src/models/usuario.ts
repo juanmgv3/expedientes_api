@@ -2,7 +2,7 @@ import { Table, Model, Column, DataType, PrimaryKey, AllowNull } from 'sequelize
 
 @Table({
     tableName: "Usuarios",
-    timestamps: false
+    timestamps: false,
 })
 
 //correo password nombre
@@ -22,7 +22,7 @@ export class Usuario extends Model{
 
     @Column({
         type: DataType.STRING,
-        allowNull: false
+        allowNull: false,
     })
     password!:string;
 
