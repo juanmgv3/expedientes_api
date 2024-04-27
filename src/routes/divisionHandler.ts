@@ -1,5 +1,6 @@
 import {Router} from "express";
 import { test, getDivisiones, crearDivision, actualizarDivision, obtenerDivision, buscarDivision, crearDepartamentoAsociado } from "../controllers/divisionesController";
+import { verifyToken } from "../middleware/verify_token";
 
 const divisionRouter = Router();
 

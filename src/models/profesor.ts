@@ -76,7 +76,7 @@ export class Profesor extends Model{
         type: DataType.STRING,
         allowNull: false,
     })
-    celular!:string;
+    cedula!:string;
 
     @BelongsTo(()=>Departamento,'Departamento_idDepartamento')
     departamento!:Departamento;

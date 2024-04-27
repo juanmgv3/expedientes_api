@@ -7,8 +7,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const secreto = process.env.APP_SECRET;
-
+const secreto = process.env.APP_SECRET || 'palabraSecreta';
+const expiration_token = "60d";
 export const login:RequestHandler = async (req,res)=>{
 
     
@@ -31,9 +31,9 @@ export const login:RequestHandler = async (req,res)=>{
         id: usuario.idUsuarios,
         correo: usuario.correo,
         nombre: usuario.nombre
-    },"palabraSecreta",{expiresIn:'10m'});
+    },secreto,{expiresIn:expiration_token});
 
-    return res.status(200).json({message:"Token generado",token:token,expiresIn:"10m"});
+    return res.status(200).json({message:"Token generado",token:token,expiresIn:expiration_token});
 
 
 };

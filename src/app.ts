@@ -7,6 +7,7 @@ import departamentoRouter from './routes/departamentoHandler';
 import profesoresRouter from './routes/profesoresHandler';
 import usuariosRouter from './routes/usuariosHandler';
 import loginRouter from './routes/loginHandler';
+import { verifyToken } from './middleware/verify_token';
 
 const app = express();
 dotenv.config();
@@ -20,10 +21,10 @@ app.get('/',(req,res)=>{
 });
 
 
-app.use('/division',divisionRouter);
-app.use('/departamento',departamentoRouter);
-app.use('/profesores',profesoresRouter);
-app.use('/usuarios',usuariosRouter);
+app.use('/division',verifyToken,divisionRouter);
+app.use('/departamento',verifyToken,departamentoRouter);
+app.use('/profesores',verifyToken,profesoresRouter);
+app.use('/usuarios',verifyToken,usuariosRouter);
 app.use('/login',loginRouter);
 
 connection.sync().then(()=>{
