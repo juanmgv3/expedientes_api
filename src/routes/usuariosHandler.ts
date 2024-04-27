@@ -1,5 +1,5 @@
 import {Router} from "express";
-import { crearUsuario, actualizarUsuario, listarUsuarios, eliminarUsuario } from '../controllers/usuariosController';
+import { crearUsuario, actualizarUsuario, listarUsuarios, eliminarUsuario, exportarUsuarios } from '../controllers/usuariosController';
 
 
 
@@ -9,5 +9,6 @@ usuariosRouter.get('/',listarUsuarios);
 usuariosRouter.post('/',crearUsuario);
 usuariosRouter.put('/:id',actualizarUsuario);
 usuariosRouter.delete('/:id',eliminarUsuario);
+usuariosRouter.get('/exportar',exportarUsuarios);
 
 export default usuariosRouter;

@@ -8,12 +8,19 @@ import profesoresRouter from './routes/profesoresHandler';
 import usuariosRouter from './routes/usuariosHandler';
 import loginRouter from './routes/loginHandler';
 import { verifyToken } from './middleware/verify_token';
+import cors from 'cors';
 
 const app = express();
 dotenv.config();
 const port = process.env.PORT;
 
 app.use(json());
+app.use(cors());
+app.use(cors({
+    origin: '*',
+    methods: ['GET','POST','PUT','DELETE'],
+    allowedHeaders: ['Content-Type','Authorization']
+}));
 app.use(urlencoded({extended:true}));
 
 app.get('/',(req,res)=>{

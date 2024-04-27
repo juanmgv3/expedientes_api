@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import { Usuario } from "../models/usuario";
 import bcrypt from 'bcrypt';
+import excelJS from 'exceljs';
 
 export const crearUsuario:RequestHandler = async (req,res)=>{
     const usuario = await Usuario.findOne({where:{correo:req.body.correo}});
@@ -63,3 +64,25 @@ export const eliminarUsuario:RequestHandler = async (req,res)=>{
         return res.status(500).json({message:"Error al eliminar el usuario",error:error.message});
     });
 }
+
+export const exportarUsuarios:RequestHandler = async (req,res)=>{
+    const usuarios = await Usuario.findAll({attributes:{exclude:["password"]}});
+    const workbook = new excelJS.Workbook();
+    const workSheet = workbook.addWorksheet("Usuarios");
+
+    workSheet.columns = [
+        {header:"ID",key:"idUsuarios"},
+        {header:"Nombre",key:"nombre"},
+        {header:"Correo electrónico",key:"correo"}
+    ];
+
+    usuarios.forEach(usuario => {
+        workSheet.addRow(usuario.toJSON());
+    });
+
+    res.setHeader('Content-Type','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    res.setHeader('Content-Disposition','attachment; filename=usuarios.xlsx');
+    return workbook.xlsx.write(res).then(()=>{
+        res.status(200).end();
+    });
+};

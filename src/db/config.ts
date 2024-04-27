@@ -21,7 +21,7 @@ const connection = new Sequelize({
     username: user,
     password: pass,
     database: db,
-    logging: (...msg)=>console.log(msg),
+    logging: false,
     port: 33062,
     models: [Division,Departamento,Profesor,CentroInvestigacion,ProfeCentroInvestigacion,Usuario]
 });
