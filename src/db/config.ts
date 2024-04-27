@@ -4,6 +4,7 @@ import { Departamento } from "../models/departamento";
 import dotenv from "dotenv";
 import { CentroInvestigacion } from "../models/centro_investigacion";
 import { Profesor } from "../models/profesor";
+import { ProfeCentroInvestigacion } from "../models/profe_centro_inv";
 dotenv.config();
 
 const user = process.env.DB_USER;
@@ -21,7 +22,7 @@ const connection = new Sequelize({
     database: db,
     logging: (...msg)=>console.log(msg),
     port: 33062,
-    models: [Division,Departamento,Profesor,CentroInvestigacion]
+    models: [Division,Departamento,Profesor,CentroInvestigacion,ProfeCentroInvestigacion]
 });
 
 export default connection;
