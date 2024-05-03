@@ -9,6 +9,8 @@ import usuariosRouter from './routes/usuariosHandler';
 import loginRouter from './routes/loginHandler';
 import { verifyToken } from './middleware/verify_token';
 import cors from 'cors';
+import { obtenerCentrosDeInvestigacion } from './controllers/centro_investigacionController';
+import centro_investigacionRouter from './routes/centro_investigacionHandler';
 
 const app = express();
 dotenv.config();
@@ -30,9 +32,10 @@ app.get('/',(req,res)=>{
 
 app.use('/division',verifyToken,divisionRouter);
 app.use('/departamento',verifyToken,departamentoRouter);
-app.use('/profesores',verifyToken,profesoresRouter);
+app.use('/profesores', verifyToken, profesoresRouter);  
 app.use('/usuarios',verifyToken,usuariosRouter);
 app.use('/login',loginRouter);
+app.use('/centro_investigacion', centro_investigacionRouter);  //falta verifytoken 
 
 connection.sync().then(()=>{
     console.log("La base de datos funciona");

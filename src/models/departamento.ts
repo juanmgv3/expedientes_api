@@ -1,5 +1,6 @@
-import {Table, Model, Column, DataType, BelongsTo} from 'sequelize-typescript';
+import {Table, Model, Column, DataType, BelongsTo, HasMany} from 'sequelize-typescript';
 import {Division} from './division';
+import {CentroInvestigacion} from './centro_investigacion';
 
 @Table({
     tableName: "Departamento",
@@ -27,6 +28,11 @@ export class Departamento extends Model{
     })
     nombre!:string;
 
+    //Divisiones - Departamentos
     @BelongsTo(()=>Division,'Divisiones_idDivisiones')
     division!:Division;
+
+    //Departamento - Centro de Investigacion
+    @HasMany(() => CentroInvestigacion,'Departamento_idDepartamento') 
+    centrosdeinvestigacion!: CentroInvestigacion[];
 }

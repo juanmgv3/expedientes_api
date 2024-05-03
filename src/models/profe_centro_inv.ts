@@ -17,13 +17,13 @@ export class ProfeCentroInvestigacion extends Model{
     @ForeignKey(()=>CentroInvestigacion)
     @Column({
         type: DataType.INTEGER,
-    
     })
     CentrosInvestigacion_idCentrosInvestigacion!:number;
+
     @Column({
         type: DataType.DATE,
         allowNull: false,
     })
-    fechaIngreso!:Date;
+    fechaIngreso!:Date; //no se requiere
 
 }

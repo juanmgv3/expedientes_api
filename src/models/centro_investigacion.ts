@@ -1,5 +1,7 @@
-import {Table, Model, Column, DataType, BelongsTo} from 'sequelize-typescript';
+import {Table, Model, Column, DataType, BelongsTo, BelongsToMany} from 'sequelize-typescript';
 import {Departamento} from './departamento';
+import { Profesor } from './profesor';
+import { ProfeCentroInvestigacion } from './profe_centro_inv';
 
 @Table({
     tableName: "CentrosInvestigacion",
@@ -9,8 +11,9 @@ import {Departamento} from './departamento';
 export class CentroInvestigacion extends Model{
     @Column({
         type: DataType.INTEGER,
-        allowNull: false,
         primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
     })
     idCentrosInvestigacion!:number;
 
@@ -27,7 +30,11 @@ export class CentroInvestigacion extends Model{
     })
     nombre!:string;
 
+    //Departamento - Centros de Investigacion
     @BelongsTo(()=>Departamento, 'Departamento_idDepartamento')
     departamento!:Departamento;
 
+    //Profesores - Centro de Investigación
+    @BelongsToMany(()=>Profesor,()=>ProfeCentroInvestigacion)
+    Profesores!:Profesor[];
 }

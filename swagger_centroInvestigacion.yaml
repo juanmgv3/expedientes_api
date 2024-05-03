@@ -1,0 +1,278 @@
+openapi: 3.0.3
+info:
+  title: Expediente Profesores - CUValles
+  description: |-
+    Esta Api tiene como objetivo gestionar el Expediente de Profesores del CUValles, también sirve como ejemplo para enseñar como crear una API para el Diplomado en Desarrollo Web.
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: erickg@valles.udg.mx
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Swagger Editor
+  url: https://editor.swagger.io/
+servers:
+  - url: http://localhost:3000/api/v1
+tags:
+  - name: Centros de Investigación
+    description: Es una institución dedicada a la generación de conocimiento,  formación de recursos humanos y proyectos en diversas áreas del conocimiento.
+    externalDocs:
+      description: Más información
+      url: https://editor.swagger.io/
+paths:
+  /centro_investigacion:
+    get:
+      tags:
+        - Centros de Investigación
+      summary: Consultar "Centros de Investigación"
+      description: Obtiene todos los Centros de Investigación
+      responses:
+        '200':
+          description: Lista de centros de investigación obtenida correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listaCentrosInvestigacion' 
+      #revisar
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+    post:
+      tags:
+        - Centros de Investigación
+      summary: Crear "Centro de Investigación"
+      description: Crea un Centro de Investigación
+      operationId: create_centrodeinvestigacion
+      requestBody:
+        description: Crea un nuevo Centro de Investigación en el sistema
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/centrodeinvestigacion'
+        required: true
+      responses:
+        '200':
+          description: Operación exitosa. Centro de investigación creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/centrodeinvestigacion'          
+        '404':
+          description: El Centro de Investigación no existe en la base de datos
+
+      #revisar
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+  /centro_investigacion/{id_centrodeinvestigacion}:
+    get:
+      tags:
+        - Centros de Investigación
+      summary: Obtiene un Centro de Investigación
+      description: Obtiene un Centro de Investigación existente por ID
+      operationId: read_centrodeinvestigacion
+      parameters:
+        - name: id_centrodeinvestigacion
+          in: path
+          description: ID de el Centro de Investigación
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Centro de Investigación encontrado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/centrodeinvestigacion'          
+        '404':
+          description: El Centro de Investigación no existe en la base de datos
+      #revisar
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+    put:
+      tags:
+        - Centros de Investigación
+      summary: Actualiza "Centro de Investigación"
+      description: Actualiza un Centro de Investigación existente por ID
+      operationId: update_centrodeinvestigacion
+      parameters:
+        - name: id_centrodeinvestigacion
+          in: path
+          description: ID de el Centro de Investigación
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Actualiza un Centro de Investigación en el sistema
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/centrodeinvestigacion'
+        required: true
+      responses:
+        '200':
+          description: Centro de Investigación actualizado ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/centrodeinvestigacion'          
+        '404':
+          description: No existe el Centro de Investigación
+    
+      #revisar
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+    delete:
+      tags:
+        - Centros de Investigación
+      summary: Elimina  "Centro de Investigación"
+      description: Elimina un Centro de Investigación existente por ID
+      operationId: delete_centrodeinvestigacion
+      parameters:
+        - name: id_centrodeinvestigacion
+          in: path
+          description: ID de el Centro de Investigación
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Centro de Investigacion eliminado correctamente
+        '404':
+          description: El Centro de Investigación no existe en la base de datos
+      #revisar
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+components:
+  schemas:
+    centrodeinvestigacion:
+      type: object
+      properties:
+        Departamento_idDepartamento:
+          description: ID del Departamento asociado a los Centros de Investigación
+          type: integer
+          format: int64
+          example: 1
+        nombre:
+          description: Nombre del centro de investigación
+          type: string
+          minLength: 5
+          maxLength: 20
+          example: Desarrollo de Software
+    centrodeinvestigacion_1:
+      type: object
+      properties:
+        idCentrosInvestigacion:
+          description: ID del Departamento asociado a los Centros de Investigación
+          type: integer
+          format: int64
+          example: 1
+        Departamento_idDepartamento:
+          description: ID del Departamento asociado a los Centros de Investigación
+          type: integer
+          format: int64
+          example: 1
+        nombre:
+          description: Nombre del centro de investigación
+          type: string
+          minLength: 5
+          maxLength: 20
+          example: Desarrollo de Software
+    centrodeinvestigacion_2:
+      type: object
+      properties:
+        idCentrosInvestigacion:
+          description: ID del Departamento asociado a los Centros de Investigación
+          type: integer
+          format: int64
+          example: 2
+        Departamento_idDepartamento:
+          description: ID del Departamento asociado a los Centros de Investigación
+          type: integer
+          format: int64
+          example: 1
+        nombre:
+          description: Nombre del centro de investigación
+          type: string
+          minLength: 5
+          maxLength: 20
+          example: Inteligencia Artificial
+    centrodeinvestigacion_3:
+      type: object
+      properties:
+        idCentrosInvestigacion:
+          description: ID del Departamento asociado a los Centros de Investigación
+          type: integer
+          format: int64
+          example: 3
+        Departamento_idDepartamento:
+          description: ID del Departamento asociado a los Centros de Investigación
+          type: integer
+          format: int64
+          example: 2
+        nombre:
+          description: Nombre del centro de investigación
+          type: string
+          minLength: 5
+          maxLength: 20
+          example: Internet of Things
+    listaCentrosInvestigacion:
+      type: array
+      items:
+        type: object
+        properties:
+          centro1:
+            $ref: '#/components/schemas/centrodeinvestigacion_1'
+          centro2:
+            $ref: '#/components/schemas/centrodeinvestigacion_2'
+          centro3:
+            $ref: '#/components/schemas/centrodeinvestigacion_3'  
+    #revisar
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+      xml:
+        name: '##default'
+  #revisar
+  requestBodies:
+    Pet:
+      description: Pet object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/centrodeinvestigacion'
+  #revisar
+  securitySchemes:
+    petstore_auth: 
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+          scopes:
+            write:pets: modify pets in your account
+            read:pets: read your pets
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
